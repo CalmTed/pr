@@ -1,0 +1,267 @@
+@root{
+  --gray:#444;
+  --green:#0a0;
+}
+html,body{
+  height:100%;
+  margin:0;
+}
+.field{
+  height:100%;
+  overflow:hidden;
+}
+.static{
+
+}
+
+/*   -----   PLAYER   -----   */
+.player{
+  position: fixed;
+  height: 60px;
+  width: 40px;
+  top: 50%;
+  left: 50%;
+  margin-top: -30px;
+  margin-left: -20px;
+}
+.body{
+  height: 100%;
+  width: 100%;
+  background-color: rgb(128, 128, 128);
+  top: -40px;
+  position: relative;
+}
+.head{
+  height: 30px;
+  width: 30px;
+  background: rgb(119, 119, 119);
+  position: relative;
+  top: -120px;
+  left: 5px;
+  z-index: 1300;
+  transform-origin: bottom;
+}
+.nose1,.nose2,.nose3{
+  position: relative;
+  height: 15px;
+  width: 9px;
+  background: rgb(136, 136, 136);
+}
+.nose1{
+  top: -10px;
+  left: 10px;
+  z-index: 1300;
+  transform-origin: bottom;
+  transition: all 0s;
+}
+.nose1.hold,.nose1.hold>.nose2,.nose1.hold>.nose2>.nose3{
+  height:10px;
+  top:-7px;
+}
+.nose2,.nose3{
+    top: -13px;
+    left: 0px;
+}
+.ear-l,.ear-r{
+  background: rgb(153, 153, 153);
+  height: 19px;
+  width: 4px;
+  transform: rotate(-5deg);
+  top: -14px;
+  position: absolute;
+  left: -2px;
+}
+.ear-r{
+  transform: rotate(5deg);
+  left: 28px;
+}
+.tail{
+  position: relative;
+  width: 3px;
+  height: 9px;
+  background: rgb(136, 136, 136);
+  top: -72px;
+  left: 18px;
+  transform-origin: top;
+  transform: rotate(30deg);
+  animation: wiggle 5s linear 0s infinite;
+}
+@keyframes wiggle{
+  0%,10%,100%{
+    transform: rotate(0deg);
+  }
+  2%{
+      transform: rotate(30deg);
+  }
+  4%{
+    transform: rotate(-30deg);
+  }
+  6%{
+    transform: rotate(30deg);
+  }
+  8%{
+    transform: rotate(-30deg);
+  }
+}
+.feet div{
+  position: relative;
+  width: 10px;
+  height: 20px;
+  background: rgb(153, 153, 153);
+  transform-origin: bottom;
+}
+.feet.towards>.back-l,.feet.towards>.front-r{
+  animation: step_1 1s linear 0s infinite;
+}
+.feet.towards>.back-r,.feet.towards>.front-l{
+  animation: step_2 1s linear 0s infinite;
+}
+.feet.backwards>.back-l,.feet.backwards>.front-r{
+  animation: step_2 1s linear 0s infinite;
+}
+.feet.backwards>.back-r,.feet.backwards>.front-l{
+  animation: step_1 1s linear 0s infinite;
+}
+
+.feet.left>.back-l,.feet.left>.front-l{
+  animation: step_3 0.5s linear 0s infinite;
+}
+.feet.left>.back-r,.feet.left>.front-r{
+  animation: step_4 0.5s linear 0s infinite;
+}
+.feet.right>.back-l,.feet.right>.front-l{
+  animation: step_6 0.5s linear 0s infinite;
+}
+.feet.right>.back-r,.feet.right>.front-r{
+  animation: step_5 0.5s linear 0s infinite;
+}
+@keyframes step_1{
+  0%,50%,100%{
+    transform: translateY(0px);
+  }
+  25%{
+    transform: translateY(10px);
+  }
+}
+@keyframes step_2{
+  0%,50%,100%{
+    transform: translateY(0px);
+  }
+  75%{
+    transform: translateY(10px);
+  }
+}
+@keyframes step_3{
+  0%,50%,100%{
+    transform: rotate(90deg) translate(-5px,15px);
+  }
+  25%{
+    transform: rotate(90deg) translate(-5px,0px);
+  }
+}
+@keyframes step_4{
+  0%,50%,100%{
+    transform: rotate(90deg) translate(-5px,0px);
+  }
+  75%{
+    transform: rotate(90deg)translate(-5px,10px);
+  }
+}
+@keyframes step_5{
+  0%,50%,100%{
+    transform: rotate(-90deg) translate(5px, 15px);
+  }
+  25%{
+    transform: rotate(-90deg) translate(5px, 0px);
+  }
+}
+@keyframes step_6{
+  0%,50%,100%{
+    transform: rotate(-90deg) translate(5px,0px);
+  }
+  75%{
+    transform: rotate(-90deg)translate(5px,10px);
+  }
+}
+.front-l,.front-r{
+  left: 3px;
+  top: 30px;
+}
+.front-r{
+  left: 27px;
+  top: 10px;
+}
+.back-l,.back-r{
+  top: 40px;
+  left: 3px
+}
+.back-r{
+  left: 27px;
+  top: 20px;
+}
+.obj-tree,.obj-rock,.obj-plank{
+    position: fixed;
+}
+.obj-rock.glow,.obj-plank.glow{
+  box-shadow: 0px 0px 10px 1px #FFF;
+}
+.obj-tree{
+  width: 70px;
+  height: 70px;
+  margin: -17px;
+  z-index: 200;
+}
+.obj-tree.fall:before{
+  transition: all .2s,opacity 2s;
+  width: 50px;
+  border-radius: 0;
+  height: 10px;
+  background: rgb(59, 43, 40);
+  opacity: 1;
+  top: 22px;
+  left: 42px;
+  opacity: 0;
+}
+.obj-tree.fall .obj-tree-branches{
+  transition: all .2s, opacity 2s;
+  opacity: 0;
+  width: 80px;
+  height: 70px;
+  top: -10px;
+  left: 72px;
+}
+.obj-tree:before{
+  content:' ';
+  position: relative;
+  background: rgb(59, 43, 40);
+  width: 20px;
+  height: 20px;
+  top:25px;
+  left:25px;
+  opacity: 0.4;
+  border-radius: 50%;
+  display: block;
+}
+.obj-tree-branches{
+  border-radius: 25%;
+  z-index: 2000;
+  position: absolute;
+  background: rgb(31, 82, 31);
+  opacity: .8;
+  width: 100%;
+  height: 100%;
+  top:0;
+}
+.obj-rock{
+  width: 30px;
+  height: 30px;
+  background: rgb(60, 60, 60);
+  border-radius: 40%;
+  margin: 15px;
+}
+.obj-plank{
+  width: 50px;
+  height: 10px;
+  background: rgb(59, 43, 40);
+  margin: 5px 0px 0px 25px;
+}
